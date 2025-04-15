@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Restaurando el sistema...</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="manifest" href="manifest.json">
+  <link rel="icon" href="icon.png">
+  <meta name="theme-color" content="black">
+  <style>
+    html, body {
+      margin: 0;
+      background: black;
+      color: lime;
+      font-family: 'Courier New', monospace;
+      font-size: 18px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      overflow: hidden;
+    }
+
+    #formateo, #bloqueo {
+      text-align: center;
+      display: none;
+      width: 100%;
+    }
+
+    .barra {
+      width: 80%;
+      height: 30px;
+      background: #333;
+      margin-top: 20px;
+      border: 1px solid #0f0;
+      position: relative;
+    }
+
+    .relleno {
+      height: 100%;
+      background: lime;
+      width: 0%;
+    }
+
+    #bloqueo {
+      background: red;
+      color: white;
+      padding: 40px;
+      font-size: 22px;
+    }
+  </style>
+</head>
+<body>
+
+  <div id="formateo">
+    <h1>Formateando el dispositivo...</h1>
+    <div class="barra"><div class="relleno" id="relleno"></div></div>
+    <p id="porcentaje">0%</p>
+  </div>
+
+  <div id="bloqueo">
+    <h1>🔥 SISTEMA BLOQUEADO 🔥</h1>
+    <p>Tu dispositivo ha sido bloqueado permanentemente.</p>
+    <p>Envía 999 Bitcoin a: <code>𝔉𝔞𝔪𝔦𝔩𝔶𝔇𝔯𝔦𝔩𝔩1337</code></p>
+    <p>No apagues el sistema. Estamos observando...</p>
+  </div>
+
+  <audio id="alarma" loop>
+    <source src="https://actions.google.com/sounds/v1/alarms/alarm_clock.ogg" type="audio/ogg">
+  </audio>
+
+  <script>
+    const formateo = document.getElementById('formateo');
+    const bloqueo = document.getElementById('bloqueo');
+    const relleno = document.getElementById('relleno');
+    const porcentaje = document.getElementById('porcentaje');
+    const alarma = document.getElementById('alarma');
+
+    formateo.style.display = 'block';
+
+    let progress = 0;
+    const intervalo = setInterval(() => {
+      progress++;
+      relleno.style.width = progress + '%';
+      porcentaje.textContent = progress + '%';
+      if (progress >= 100) {
+        clearInterval(intervalo);
+        formateo.style.display = 'none';
+        bloqueo.style.display = 'block';
+        alarma.play();
+
+        // Vibración móvil
+        setInterval(() => {
+          if (navigator.vibrate) navigator.vibrate([200, 100, 200]);
+        }, 2000);
+
+        // Alertas falsas
+        setInterval(() => {
+          alert("🔒 Acceso denegado.\nTu sistema ha sido bloqueado.");
+        }, 7000);
+      }
+    }, 100);
+  </script>
+
+</body>
+</html>
