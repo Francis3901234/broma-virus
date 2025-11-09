@@ -1,0 +1,171 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Carta para mi amor ✨</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&family=Great+Vibes&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --accent: #ff6b9a;
+      --accent2: #ffb6c1;
+      --bg-dark: #0b0a10;
+      --text: #f8f8f8;
+    }
+    * { box-sizing: border-box; }
+    html, body {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      font-family: 'Poppins', sans-serif;
+      background: radial-gradient(circle at 20% 20%, #1a1625 0%, #0b0a10 100%);
+      color: var(--text);
+      overflow: hidden;
+    }
+
+    .stars {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: transparent;
+      overflow: hidden;
+      z-index: 0;
+    }
+    .star {
+      position: absolute;
+      width: 2px; height: 2px;
+      background: white;
+      border-radius: 50%;
+      opacity: 0.8;
+      animation: twinkle 4s infinite ease-in-out;
+    }
+    @keyframes twinkle {
+      0%,100% { opacity: 0.2; }
+      50% { opacity: 1; }
+    }
+
+    .heart {
+      position: absolute;
+      width: 20px; height: 20px;
+      background: radial-gradient(circle at 30% 30%, var(--accent), var(--accent2));
+      transform: rotate(-45deg);
+      animation: floatUp 8s linear infinite;
+      opacity: 0.7;
+    }
+    .heart::before, .heart::after {
+      content: '';
+      position: absolute;
+      width: 20px; height: 20px;
+      background: inherit;
+      border-radius: 50%;
+    }
+    .heart::before { top: -10px; left: 0; }
+    .heart::after { left: 10px; top: 0; }
+    @keyframes floatUp {
+      0% { transform: translateY(0) rotate(-45deg); opacity: 0; }
+      10% { opacity: 1; }
+      100% { transform: translateY(-800px) rotate(-45deg); opacity: 0; }
+    }
+
+    .card {
+      position: relative;
+      z-index: 2;
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      box-shadow: 0 0 25px rgba(255, 107, 154, 0.15);
+      border-radius: 20px;
+      max-width: 720px;
+      margin: 80px auto;
+      padding: 40px;
+      backdrop-filter: blur(10px);
+    }
+
+    header {
+      text-align: center;
+      margin-bottom: 24px;
+    }
+    h1 {
+      font-family: 'Great Vibes', cursive;
+      font-size: 42px;
+      color: var(--accent2);
+      margin: 0;
+      text-shadow: 0 0 10px rgba(255, 182, 193, 0.4);
+    }
+
+    p {
+      line-height: 1.7;
+      font-size: 17px;
+      color: #f1f1f1;
+      margin: 12px 0;
+    }
+
+    .signature {
+      margin-top: 28px;
+      text-align: right;
+      font-weight: 600;
+      color: var(--accent2);
+    }
+
+    .quote {
+      margin-top: 24px;
+      font-family: 'Great Vibes', cursive;
+      text-align: center;
+      font-size: 26px;
+      color: var(--accent);
+      text-shadow: 0 0 12px rgba(255, 107, 154, 0.4);
+    }
+  </style>
+</head>
+<body>
+  <div class="stars" id="stars"></div>
+  <div class="hearts" id="hearts"></div>
+
+  <article class="card">
+    <header>
+      <h1>Carta para <mark style="background:none;color:var(--accent2);">mi amor</mark></h1>
+    </header>
+
+    <section>
+      <p>Mi <mark style="background:none;color:var(--accent2);">amor</mark>,</p>
+
+      <p>Desde que llegaste a mi vida, todo cambió para bien. Tu sonrisa se volvió mi motivo favorito, y cada día contigo es una historia que quiero seguir escribiendo sin final.</p>
+
+      <p>No importa lo que pase, quiero que sepas que siempre voy a estar aquí para ti: apoyándote, cuidándote y amándote con todo lo que soy. Eres mi paz, mi caos bonito, y mi lugar seguro.</p>
+
+      <p>A veces me quedo pensando en lo afortunado que soy de tenerte, y no hay palabras suficientes para agradecer todo lo que haces por mí. Te amo más de lo que puedo explicar, y aunque el tiempo pase, mi amor por ti solo crecerá.</p>
+
+      <p class="signature">Con todo mi corazón,<br>[Tu nombre]</p>
+
+      <p class="quote">“Eres mi cielo en la noche más oscura.”</p>
+    </section>
+  </article>
+
+  <script>
+    // Generar estrellas
+    const stars = document.getElementById('stars');
+    for(let i=0;i<100;i++){
+      const s = document.createElement('div');
+      s.className = 'star';
+      s.style.left = Math.random()*100 + '%';
+      s.style.top = Math.random()*100 + '%';
+      s.style.animationDelay = (Math.random()*4)+'s';
+      s.style.width = s.style.height = (Math.random()*2+1)+'px';
+      stars.appendChild(s);
+    }
+
+    // Generar corazones flotantes
+    const hearts = document.getElementById('hearts');
+    function spawnHeart(){
+      const h = document.createElement('div');
+      h.className = 'heart';
+      h.style.left = Math.random()*100 + '%';
+      h.style.bottom = '-20px';
+      h.style.width = h.style.height = 14 + Math.random()*20 + 'px';
+      h.style.animationDuration = 6 + Math.random()*5 + 's';
+      hearts.appendChild(h);
+      setTimeout(()=>h.remove(),10000);
+    }
+    setInterval(spawnHeart, 700);
+  </script>
+</body>
+</html>
